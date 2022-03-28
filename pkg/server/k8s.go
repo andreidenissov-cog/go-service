@@ -48,6 +48,8 @@ func attemptK8sStart() (err kv.Error) {
 
 	if client, errGo := k8s.NewInClusterClient(); errGo != nil {
 		k8sInitErr = kv.Wrap(errGo).With("stack", stack.Trace().TrimRuntime())
+
+		fmt.Printf(">>>>>> FAILED to start NewInClusterClient %s\n", k8sInitErr.Error())
 	} else {
 		k8sClient = client
 	}
